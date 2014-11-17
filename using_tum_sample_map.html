@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+  <html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+      <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+      <link rel="stylesheet" href="http://js.arcgis.com/3.11/esri/css/esri.css">
+      <link rel="stylesheet" href="http://js.arcgis.com/3.11/dijit/themes/claro/claro.css">
+        <link rel="stylesheet" href="http://js.arcgis.com/3.11/dijit/themes/tundra/tundra.css">
+      <script src="http://js.arcgis.com/3.11/"></script>
+      <script>
+        var map;
+        require([
+              "esri/map",
+              "esri/arcgis/utils",
+              "esri/dijit/Legend",
+              "dojo/domReady!"
+              ], function(Map, arcgisUtils, Legend){
+              arcgisUtils.createMap("6a57582c4bd743f6b7335b0a8e354476", "mapDiv").then(function (response) {
+                  map = response.map;
+                  var legend = new Legend({
+                      map: map,
+                      layerInfos:(arcgisUtils.getLegendLayers(response))
+                  }, "legendDiv")
+                  legend.startup();
+              });
+          });
+      </script>
+      <title>ArcGis Sampl Map of TUM</title>
+      <style>
+        html,body,#mapDiv,.map.container{
+            padding:0;
+            margin:0;
+            height:100%;
+          }
+          #legendDiv{
+            background-color: #fff;
+            position: absolute !important;
+            z-index: 99;
+            top:10px;
+            right:20px;
+          }
+      </style>
+    </head>
+    <body class="tundra">
+        <div id="mapDiv"></div>
+        <div id="legendDiv"></div>
+    </body>
+  </html>
